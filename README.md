@@ -7,8 +7,24 @@
 
 ## Progetto 2 - Top Down Scroller
 
-[TBD]
+Top-down Space shooter in 3D.
 
-## Argomenti Trattati 2
+## Argomenti Trattati
 
-[TBD]
+* [Input.GetAxis()](https://docs.unity3d.com/ScriptReference/Input.GetAxis.html)
+* [Input.GetKeyDown()](https://docs.unity3d.com/ScriptReference/Input.GetKeyDown.html)
+* [Input.GetKeyUp](https://docs.unity3d.com/ScriptReference/Input.GetKeyUp.html)
+* [Input.GetKey()](https://docs.unity3d.com/ScriptReference/Input.GetKey.html)
+* Utilizzo di [Instantiate](https://docs.unity3d.com/Manual/InstantiatingPrefabs.html) per instanziare oggetti in scena
+* I [Prefab](https://docs.unity3d.com/Manual/Prefabs.html)
+* Gli [Scriptable Objects](https://docs.unity3d.com/Manual/class-ScriptableObject.html)
+
+
+### Script
+
+* [Creare un controller per una navetta spaziale](https://gist.github.com/marcosecchi/e0fefa41074c0d93eb3b7db0b4f77bc9)
+* [Implementare il controller tramite uno ScriptableObject](https://gist.github.com/marcosecchi/e0fefa41074c0d93eb3b7db0b4f77bc9)
+
+### Link Utili
+
+* Video seminario sugli [Scriptable Objects](https://unity3d.com/learn/tutorials/modules/beginner/live-training-archive/scriptable-objects)
