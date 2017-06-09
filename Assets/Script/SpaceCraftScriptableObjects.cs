@@ -10,7 +10,7 @@ public class SpaceCraftScriptableObjects : ScriptableObject {
 	[Header("SpaceCraft Data")]
 
 	// L'accelerazione della navetta
-	public float acceleration;
+	public float acceleration = 50f;
 
 	// Attributo decoratore per creare un titolo nella finestra dell'Inspector
 	[Header("Weapon Data")]
