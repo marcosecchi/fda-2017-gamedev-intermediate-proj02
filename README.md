@@ -9,6 +9,6 @@
 
 [TBD]
 
-## Argomenti Trattati 2 - Top Down Scroller
+## Argomenti Trattati 2
 
 [TBD]
