@@ -10,6 +10,8 @@ public class SpaceCraftController : MonoBehaviour {
 	// Contatore per il fuoco multiplo della seconda arma
 	private float _timeToNextFire = 0;
 
+	public GameObject modelContainer;
+
 	// Durante il rendering di ogni frame...
 	void Update() {
 
@@ -68,5 +70,12 @@ public class SpaceCraftController : MonoBehaviour {
 
 		// Sposto la la navetta dei valori calcolati
 		transform.Translate (hMove, 0, vMove);
+
+
+		// Calcolo l'inclinazione della navetta durante il movimento orizzontale
+		float roll = - Input.GetAxis ("Horizontal") * data.maxRoll;
+
+		Quaternion rot = Quaternion.Euler(0, 0, roll);
+		modelContainer.transform.rotation = rot;
 	}
 }

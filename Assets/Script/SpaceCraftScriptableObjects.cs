@@ -12,6 +12,9 @@ public class SpaceCraftScriptableObjects : ScriptableObject {
 	// L'accelerazione della navetta
 	public float acceleration = 50f;
 
+	// La massima inclinazione della navetta quando è in movimento orizzontale
+	public float maxRoll = 30f;
+
 	// Attributo decoratore per creare un titolo nella finestra dell'Inspector
 	[Header("Weapon Data")]
 
