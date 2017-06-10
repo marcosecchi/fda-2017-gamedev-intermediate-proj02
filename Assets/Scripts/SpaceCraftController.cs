@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpaceCraftController : MonoBehaviour {
 
 	// Lo ScriptableObject contenente i dati di configurazione della navetta
-	public SpaceCraftScriptableObjects data;
+	public SpaceCraftScriptableObject data;
 
 	// Contatore per il fuoco multiplo della seconda arma
 	private float _timeToNextFire = 0;
