@@ -20,7 +20,7 @@ Top-down Space shooter in 3D.
 * Gli [Scriptable Objects](https://docs.unity3d.com/Manual/class-ScriptableObject.html)
 * Serializzare una classe con [System.Serializable](https://docs.unity3d.com/ScriptReference/Serializable.html)
 * [Renderer.materials](https://docs.unity3d.com/ScriptReference/Renderer-materials.html)
-* [GetComponentsInChildren](https://docs.unity3d.com/ScriptReference/Component.GetComponentsInChildren.html)
+* [GetComponentsInChildren()](https://docs.unity3d.com/ScriptReference/Component.GetComponentsInChildren.html)
 
 ### Script
 
