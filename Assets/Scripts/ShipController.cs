@@ -7,14 +7,17 @@ public class ShipController : MonoBehaviour {
 	// I dati della navetta
 	public ShipScriptableObject data;
 
+	// Il contenitore dove inserire il modello della navetta
 	public GameObject modelContainer;
 
+	// Riferimento ai dati della navetta
 	private ShipSystemData _shipData;
 
+	// Riferimento al weapons controller
 	private WeaponsController _weaponsController;
 
-
 	void Start () {
+		// Inizializzo i dati
 		Init ();
 	}
 
@@ -28,6 +31,8 @@ public class ShipController : MonoBehaviour {
 	public void Init() {
 
 		_shipData = data.shipData;
+
+		// Recupero il weapons controller, nel caso esista e lo inizializzo
 		WeaponsController _weaponsController = gameObject.GetComponent<WeaponsController> ();
 		if (_weaponsController != null)
 			_weaponsController.Init (data.weaponsData);
@@ -37,6 +42,7 @@ public class ShipController : MonoBehaviour {
 		foreach (Transform t in modelContainer.transform)
 			Destroy (t.gameObject);
 
+		// Instanzion il modello della navetta
 		GameObject ship = GameObject.Instantiate (_shipData.shipPrefab, modelContainer.transform);
 		ship.name = _shipData.modelName;
 
@@ -79,6 +85,7 @@ public class ShipController : MonoBehaviour {
 		// Calcolo l'inclinazione della navetta durante il movimento orizzontale
 		float roll = - Input.GetAxis ("Horizontal") * _shipData.maxRoll;
 
+		// Ruoto il container del modello della navetta
 		Quaternion rot = Quaternion.Euler(0, 0, roll);
 		modelContainer.transform.rotation = rot;
 	}
