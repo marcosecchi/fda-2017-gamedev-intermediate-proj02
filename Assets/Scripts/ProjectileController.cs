@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour {
 
-	// LA velocità del proiettile
+	// La velocità del proiettile
 	public float speed = 30f;
 
 	void Update () {
