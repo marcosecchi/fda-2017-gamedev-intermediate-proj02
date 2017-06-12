@@ -4,41 +4,82 @@ using UnityEngine;
 
 public class ShipController : MonoBehaviour {
 
+	// I dati della navetta
+	public ShipScriptableObject data;
+
 	public GameObject modelContainer;
 
-	public ShipDataScriptableObject data;
+	private ShipSystemData _shipData;
+
+	private WeaponsController _weaponsController;
+
 
 	void Start () {
-		
 		Init ();
-		
-	}
-	
-	void Update () {
-		CheckMovement ();	
 	}
 
+	// Durante il rendering di ogni frame...
+	void Update () {
+		// ... controllo il movimento,
+		CheckMovement ();
+	}
+
+	// Inizializza la navetta
 	public void Init() {
 
-		foreach (Transform t in modelContainer.transform) {
+		_shipData = data.shipData;
+		WeaponsController _weaponsController = gameObject.GetComponent<WeaponsController> ();
+		if (_weaponsController != null)
+			_weaponsController.Init (data.weaponsData);
+
+		// Rimuovo tutti gli elementi all'interno del model container
+		// Nel caso avessi già instanziato una navetta precedentemente
+		foreach (Transform t in modelContainer.transform)
 			Destroy (t.gameObject);
+
+		GameObject ship = GameObject.Instantiate (_shipData.shipPrefab, modelContainer.transform);
+		ship.name = _shipData.modelName;
+
+		// Se la navetta possiede un renderer, procedo alla sostituzione dei colori
+		if (ship.GetComponentInChildren<Renderer> () != null) {
+			// Recupero l'elenco dei materiali della navetta
+			Material[] shipMaterials = ship.GetComponentInChildren<Renderer> ().materials;
+
+			// Ciclo sui colori all'interno del mio ScriptableObject
+			for (int i = 0; i < _shipData.shipColors.Length; i++) {
+				// Se l'indice del colore che sto considerando è presente nella lista
+				// dei materiali...
+				if (i >= shipMaterials.Length)
+					break;
+				// ...assegno il colore
+				shipMaterials [i].color = _shipData.shipColors [i];
+			}
 		}
 
-		GameObject ship = Instantiate (data.shipSystemData.shipModelPrefab, modelContainer.transform);
 	}
 
-	void CheckMovement() {
-		float vMove = Input.GetAxis ("Vertical") * data.shipSystemData.acceleration;
-		float hMove = Input.GetAxis ("Horizontal") * data.shipSystemData.acceleration;
+	// Funzione che controlla il movimento
+	private void CheckMovement () {
 
+		// Recupero il movimento orizzontale del joystick o delle frecce
+		// e le moltiplico per l'accelerazione della navetta
+		float vMove = Input.GetAxis ("Vertical") * _shipData.acceleration;
+		float hMove = Input.GetAxis ("Horizontal") * _shipData.acceleration;
+
+		// Calcolo lo spostamento effettivo (orizzontale e verticale)
+		// basato sul deltaTime, cioè il tempo intercorso dall'ultimo
+		// frame renderizzato
 		vMove *= Time.deltaTime;
 		hMove *= Time.deltaTime;
 
+		// Sposto la la navetta dei valori calcolati
 		transform.Translate (hMove, 0, vMove);
 
-		float roll = Input.GetAxis ("Horizontal") * data.shipSystemData.maxRoll;
 
-		Quaternion rot = Quaternion.Euler (0, 0, - roll);
+		// Calcolo l'inclinazione della navetta durante il movimento orizzontale
+		float roll = - Input.GetAxis ("Horizontal") * _shipData.maxRoll;
+
+		Quaternion rot = Quaternion.Euler(0, 0, roll);
 		modelContainer.transform.rotation = rot;
 	}
 }
