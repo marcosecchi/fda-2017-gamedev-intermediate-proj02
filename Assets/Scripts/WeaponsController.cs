@@ -4,102 +4,97 @@ using UnityEngine;
 
 public class WeaponsController : MonoBehaviour {
 
-	private WeaponData _weapon1Data;
-	private WeaponData _weapon2Data;
-
-	private List<GameObject> _weapon1SpawnPoints;
-	private List<GameObject> _weapon2SpawnPoints;
+	private List<ShipWeapon> _weapons;
 
 	// Inizializzo le armi
 	public void Init (WeaponsSystemData data) {
-		_weapon1Data = data.weapon1;
-		_weapon2Data = data.weapon2;
 
-		_weapon1SpawnPoints = new List<GameObject> ();
-		_weapon2SpawnPoints = new List<GameObject> ();
+		_weapons = new List<ShipWeapon> ();
 
-		Transform[] allChildren = gameObject.GetComponentsInChildren<Transform>();
-		foreach (Transform t in allChildren) {
-			if (t.gameObject.tag == _weapon1Data.tag)
-				_weapon1SpawnPoints.Add (t.gameObject);
-			else if (t.gameObject.tag == _weapon2Data.tag)
-				_weapon2SpawnPoints.Add (t.gameObject);
+		foreach (WeaponData wd in data.weapons) {
+			ShipWeapon sw = new ShipWeapon ();
+			sw.data = wd;
+			Transform[] allChildren = gameObject.GetComponentsInChildren<Transform>();
+			foreach (Transform t in allChildren) {
+				if (t.gameObject.tag == sw.data.tag)
+					sw.spawnPoints.Add (t.gameObject);
+			}
+			_weapons.Add (sw);
 		}
 	}
 
 	// Durante il rendering di ogni frame...
 	void Update () {
 
-		// ... diminuisco il tempo che rimane per riutilizzare la seconda arma,
-		_weapon1Data.timeToNextFire -= Time.deltaTime;
-		_weapon2Data.timeToNextFire -= Time.deltaTime;
+		foreach (ShipWeapon sw in _weapons) {
+			// ... diminuisco il tempo che rimane per riutilizzare la seconda arma,
+			sw.timeToNextFire -= Time.deltaTime;
 
-		// ... controllo il fuoco delle armi
-		CheckWeaponFire (_weapon1Data, _weapon1SpawnPoints);
-		CheckWeaponFire (_weapon2Data, _weapon2SpawnPoints);
+			// ... controllo il fuoco delle armi
+			CheckWeaponFire (sw);
+		}
 	}
 
 	// Funzione che controlla il fuoco delle armi
-	private void CheckWeaponFire(WeaponData data, List<GameObject> spawnPoints) {
-		switch (data.fireRate) {
+	private void CheckWeaponFire(ShipWeapon weapon) {
+		switch (weapon.data.fireRate) {
 		case FireRateType.Auto:
-			CheckAutoFire (data, spawnPoints);
+			CheckAutoFire (weapon);
 			break;
 		case FireRateType.Multiple:
-			CheckMultipleFire (data, spawnPoints);
+			CheckMultipleFire (weapon);
 			break;
 		case FireRateType.Single:
-			CheckSingleFire (data, spawnPoints);
+			CheckSingleFire (weapon);
 			break;
 		default:
 			break;
 		}
 	}
 
-	private void CheckSingleFire(WeaponData data, List<GameObject> spawnPoints) {
-		// Spara una singola volta per ogni volta che viene premuto
-		// il tasto 'Space'
-		if (Input.GetKeyDown (data.fireKeycode)) {
-			// Crea una istanza del proiettile e la rinomina
-			foreach(GameObject spawn in spawnPoints) {
-				GameObject go = GameObject.Instantiate (data.weaponPrefab, spawn.transform.position, spawn.transform.rotation);
-				go.name = data.name;
-			}
+	private void GenerateBullets(ShipWeapon weapon) {
+		// Crea una istanza del proiettile per ogni
+		// spawn point (se è abilitato)
+		foreach(GameObject spawn in weapon.spawnPoints) {
+			if (!spawn.activeInHierarchy)
+				continue;
+			GameObject go = GameObject.Instantiate (weapon.data.weaponPrefab, spawn.transform.position, spawn.transform.rotation);
+			go.name = weapon.data.name;
 		}
 	}
 
-	private void CheckMultipleFire(WeaponData data, List<GameObject> spawnPoints) {
+	private void CheckSingleFire(ShipWeapon weapon) {
+		// Spara una singola volta per ogni volta che viene premuto
+		// il tasto 'Space'
+		if (Input.GetKeyDown (weapon.data.fireKeycode)) {
+			GenerateBullets (weapon);
+		}
+	}
+
+	private void CheckMultipleFire(ShipWeapon weapon) {
 		// Spara se è intercorso il
 		// tempo per sparare il successivo proiettile
-		if (Input.GetKey (data.fireKeycode) && data.timeToNextFire <= 0) {
-			// Crea una istanza del secondo proiettile e la rinomina
-			foreach(GameObject spawn in spawnPoints) {
-				GameObject go = GameObject.Instantiate (data.weaponPrefab, spawn.transform.position, spawn.transform.rotation);
-				go.name = data.name;
-			}
+		if (Input.GetKey (weapon.data.fireKeycode) && weapon.timeToNextFire <= 0) {
+			GenerateBullets (weapon);
 
 			// Inizializzo il contatore per il fuoco multiplo
-			data.timeToNextFire = data.fireInterval;
+			weapon.timeToNextFire = weapon.data.fireInterval;
 		}
 
 		// Se il tasto viene rilasciato, resetto il contatore del fuoco multiplo
-		if (Input.GetKeyUp (data.fireKeycode)) {
-			data.timeToNextFire = 0;
+		if (Input.GetKeyUp (weapon.data.fireKeycode)) {
+			weapon.timeToNextFire = 0;
 		}
 	}
 
-	private void CheckAutoFire(WeaponData data, List<GameObject> spawnPoints) {
+	private void CheckAutoFire(ShipWeapon weapon) {
 		// Spara se è intercorso il
 		// tempo per sparare il successivo proiettile
-		if (data.timeToNextFire <= 0) {
-			// Crea una istanza del secondo proiettile e la rinomina
-			foreach(GameObject spawn in spawnPoints) {
-				GameObject go = GameObject.Instantiate (data.weaponPrefab, spawn.transform.position, spawn.transform.rotation);
-				go.name = data.name;
-			}
+		if (weapon.timeToNextFire <= 0) {
+			GenerateBullets (weapon);
 
 			// Inizializzo il contatore per il fuoco multiplo
-			data.timeToNextFire = data.fireInterval;
+			weapon.timeToNextFire = weapon.data.fireInterval;
 		}
 	}
 }
