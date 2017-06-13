@@ -67,6 +67,8 @@ public class ShipController : MonoBehaviour {
 	// Funzione che controlla il movimento
 	private void CheckMovement () {
 
+		/* *** MOVIMENTO NAVETTA *** */
+
 		// Recupero il movimento orizzontale del joystick o delle frecce
 		// e le moltiplico per l'accelerazione della navetta
 		float vMove = Input.GetAxis ("Vertical") * _shipData.acceleration;
@@ -81,6 +83,8 @@ public class ShipController : MonoBehaviour {
 		// Sposto la la navetta dei valori calcolati
 		transform.Translate (hMove, 0, vMove);
 
+
+		/* *** INCLINAZIONE NAVETTA *** */
 
 		// Calcolo l'inclinazione della navetta durante il movimento orizzontale
 		float roll = - Input.GetAxis ("Horizontal") * _shipData.maxRoll;
