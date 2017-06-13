@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class WeaponsController : MonoBehaviour {
 
+	// Lista delle armi
 	private List<ShipWeapon> _weapons;
 
 	// Inizializzo le armi
 	public void Init (WeaponsSystemData data) {
 
+		// Inizializzo la lista
 		_weapons = new List<ShipWeapon> ();
 
+		// Cicla sulle armi recuperate dallo scriptable object
+		// e successivamente recupera gli spawn points tramite i tag assegnati
 		foreach (WeaponData wd in data.weapons) {
 			ShipWeapon sw = new ShipWeapon ();
 			sw.data = wd;
