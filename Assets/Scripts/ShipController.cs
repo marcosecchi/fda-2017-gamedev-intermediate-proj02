@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShipController : MonoBehaviour {
 
 	// I dati della navetta
-	public ShipScriptableObject data;
+	public ShipDataScriptableObject data;
 
 	// Il contenitore dove inserire il modello della navetta
 	public GameObject modelContainer;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Questo attributo permette di aggiungere un elemento al menu dell'Editor di Unity
 [CreateAssetMenu(fileName="ShipData", menuName="FDA/ShipData", order=1)]
-public class ShipScriptableObject : ScriptableObject {
+public class ShipDataScriptableObject : ScriptableObject {
 
 	// Attributo decoratore per creare un titolo nella finestra dell'Inspector
 	[Header("SpaceCraft Data")]

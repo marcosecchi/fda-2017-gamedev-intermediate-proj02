@@ -10,9 +10,6 @@ public class WeaponsController : MonoBehaviour {
 	private List<GameObject> _weapon1SpawnPoints;
 	private List<GameObject> _weapon2SpawnPoints;
 
-	private float _timeToNextFire1 = 0;
-	private float _timeToNextFire2 = 0;
-
 	// Inizializzo le armi
 	public void Init (WeaponsSystemData data) {
 		_weapon1Data = data.weapon1;
@@ -34,8 +31,8 @@ public class WeaponsController : MonoBehaviour {
 	void Update () {
 
 		// ... diminuisco il tempo che rimane per riutilizzare la seconda arma,
-		_timeToNextFire1 -= Time.deltaTime;
-		_timeToNextFire2 -= Time.deltaTime;
+		_weapon1Data.timeToNextFire -= Time.deltaTime;
+		_weapon2Data.timeToNextFire -= Time.deltaTime;
 
 		// ... controllo il fuoco delle armi
 		CheckWeaponFire (_weapon1Data, _weapon1SpawnPoints);
