@@ -32,11 +32,6 @@ public class ShipController : MonoBehaviour {
 
 		_shipData = data.shipData;
 
-		// Recupero il weapons controller, nel caso esista e lo inizializzo
-		WeaponsController _weaponsController = gameObject.GetComponent<WeaponsController> ();
-		if (_weaponsController != null)
-			_weaponsController.Init (data.weaponsData);
-
 		// Rimuovo tutti gli elementi all'interno del model container
 		// Nel caso avessi già instanziato una navetta precedentemente
 		foreach (Transform t in modelContainer.transform)
@@ -61,6 +56,11 @@ public class ShipController : MonoBehaviour {
 				shipMaterials [i].color = _shipData.shipColors [i];
 			}
 		}
+
+		// Recupero il weapons controller, nel caso esista e lo inizializzo
+		WeaponsController _weaponsController = gameObject.GetComponent<WeaponsController> ();
+		if (_weaponsController != null)
+			_weaponsController.Init (data.weaponsData);
 
 	}
 
