@@ -21,7 +21,7 @@ Top-down Space shooter in 3D.
 * Serializzare una classe con [System.Serializable](https://docs.unity3d.com/ScriptReference/Serializable.html)
 * [Renderer.materials](https://docs.unity3d.com/ScriptReference/Renderer-materials.html)
 * [GetComponentsInChildren()](https://docs.unity3d.com/ScriptReference/Component.GetComponentsInChildren.html)
-* [Camera.WorldToViewportPoint](https://docs.unity3d.com/ScriptReference/Camera.WorldToViewportPoint.html)
+* [Camera.WorldToViewportPoint()](https://docs.unity3d.com/ScriptReference/Camera.WorldToViewportPoint.html)
 
 ### Script
 
@@ -30,6 +30,8 @@ Top-down Space shooter in 3D.
 * [Ship Management System](https://gist.github.com/marcosecchi/86746c261a8d7e7991a2c6c5a4e6041e)
 * [Cicli _for_ e _foreach_](https://repl.it/Ikdz/latest/162317)
 * [Utilizzo delle _List_](https://repl.it/Ike9/latest/162317)
+* [Move Ship](https://gist.github.com/marcosecchi/9abfb0b33bd9c8897086753b9631ee01)
+* [Ship Management System (Improved)](https://gist.github.com/marcosecchi/019f1de99e04d4a2ea04d56538c262a0)
 
 
 ### Link Utili
