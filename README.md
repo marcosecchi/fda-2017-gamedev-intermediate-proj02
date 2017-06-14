@@ -28,6 +28,9 @@ Top-down Space shooter in 3D.
 * [Implementare il controller tramite uno ScriptableObject](https://gist.github.com/marcosecchi/e0fefa41074c0d93eb3b7db0b4f77bc9)
 * [Ship Management System](https://gist.github.com/marcosecchi/86746c261a8d7e7991a2c6c5a4e6041e)
 
+* [Cicli _for_ e _foreach_](https://repl.it/Ikdz/latest/162317)
+* [Utilizzo delle _List_](https://repl.it/Ike9/latest/162317)
+
 
 ### Link Utili
 
