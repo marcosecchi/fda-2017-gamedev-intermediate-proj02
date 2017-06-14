@@ -23,9 +23,6 @@ public class WeaponData {
 	// (Solitamente utilizzato nei casi di Multiple ed Auto)
 	public float fireInterval = 0;
 
-	// Questo valore non deve essere mostrato nell'editor
-	[HideInInspector]
-	public float timeToNextFire = 0;
 }
 
 // Enumera i tipi di fuoco

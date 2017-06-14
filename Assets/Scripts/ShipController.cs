@@ -72,9 +72,13 @@ public class ShipController : MonoBehaviour {
 		vMove *= Time.deltaTime;
 		hMove *= Time.deltaTime;
 
-		// Sposto la la navetta dei valori calcolati
-		transform.Translate (hMove, 0, vMove);
+		Vector3 nextPosition = new Vector3 (transform.position.x + hMove, 0, transform.position.z + vMove);
+		Vector3 viewPos = Camera.main.WorldToViewportPoint (nextPosition);
 
+		if (viewPos.x > 0.1f && viewPos.x < 0.9f && viewPos.y > 0.1f && viewPos.y < 0.9f) {	
+			// Sposto la la navetta dei valori calcolati
+			transform.Translate (hMove, 0, vMove);
+		}
 
 		// Calcolo l'inclinazione della navetta durante il movimento orizzontale
 		float roll = - Input.GetAxis ("Horizontal") * _shipData.maxRoll;
