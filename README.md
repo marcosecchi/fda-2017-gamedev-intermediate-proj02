@@ -21,7 +21,7 @@ Top-down Space shooter in 3D.
 * Serializzare una classe con [System.Serializable](https://docs.unity3d.com/ScriptReference/Serializable.html)
 * [Renderer.materials](https://docs.unity3d.com/ScriptReference/Renderer-materials.html)
 * [GetComponentsInChildren()](https://docs.unity3d.com/ScriptReference/Component.GetComponentsInChildren.html)
-* [https://docs.unity3d.com/ScriptReference/Camera.WorldToViewportPoint.html](https://docs.unity3d.com/ScriptReference/Camera.WorldToViewportPoint.html)
+* [Camera.WorldToViewportPoint](https://docs.unity3d.com/ScriptReference/Camera.WorldToViewportPoint.html)
 
 ### Script
 
