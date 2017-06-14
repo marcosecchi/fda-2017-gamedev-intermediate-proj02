@@ -10,9 +10,6 @@ public class WeaponData {
 	// il nome dell'arma
 	public string name;
 
-	// L'etichetta dell'arma
-	public string tag;
-
 	// Il prefab del proiettile sparato
 	public GameObject weaponPrefab;
 

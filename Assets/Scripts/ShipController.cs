@@ -7,17 +7,14 @@ public class ShipController : MonoBehaviour {
 	// I dati della navetta
 	public ShipDataScriptableObject data;
 
-	// Il contenitore dove inserire il modello della navetta
 	public GameObject modelContainer;
 
-	// Riferimento ai dati della navetta
 	private ShipSystemData _shipData;
 
-	// Riferimento al weapons controller
 	private WeaponsController _weaponsController;
 
+
 	void Start () {
-		// Inizializzo i dati
 		Init ();
 	}
 
@@ -31,13 +28,15 @@ public class ShipController : MonoBehaviour {
 	public void Init() {
 
 		_shipData = data.shipData;
+		WeaponsController _weaponsController = gameObject.GetComponent<WeaponsController> ();
+		if (_weaponsController != null)
+			_weaponsController.Init (data.weaponsData);
 
 		// Rimuovo tutti gli elementi all'interno del model container
 		// Nel caso avessi già instanziato una navetta precedentemente
 		foreach (Transform t in modelContainer.transform)
 			Destroy (t.gameObject);
 
-		// Instanzion il modello della navetta
 		GameObject ship = GameObject.Instantiate (_shipData.shipPrefab, modelContainer.transform);
 		ship.name = _shipData.modelName;
 
@@ -50,24 +49,17 @@ public class ShipController : MonoBehaviour {
 			for (int i = 0; i < _shipData.shipColors.Length; i++) {
 				// Se l'indice del colore che sto considerando è presente nella lista
 				// dei materiali...
-				if (i >= shipMaterials.Length)
-					break;
-				// ...assegno il colore
-				shipMaterials [i].color = _shipData.shipColors [i];
+				if (i <= shipMaterials.Length) {
+					// ...assegno il colore
+					shipMaterials [i].color = _shipData.shipColors [i];
+				}
 			}
 		}
-
-		// Recupero il weapons controller, nel caso esista e lo inizializzo
-		WeaponsController _weaponsController = gameObject.GetComponent<WeaponsController> ();
-		if (_weaponsController != null)
-			_weaponsController.Init (data.weaponsData);
 
 	}
 
 	// Funzione che controlla il movimento
 	private void CheckMovement () {
-
-		/* *** MOVIMENTO NAVETTA *** */
 
 		// Recupero il movimento orizzontale del joystick o delle frecce
 		// e le moltiplico per l'accelerazione della navetta
@@ -84,12 +76,9 @@ public class ShipController : MonoBehaviour {
 		transform.Translate (hMove, 0, vMove);
 
 
-		/* *** INCLINAZIONE NAVETTA *** */
-
 		// Calcolo l'inclinazione della navetta durante il movimento orizzontale
 		float roll = - Input.GetAxis ("Horizontal") * _shipData.maxRoll;
 
-		// Ruoto il container del modello della navetta
 		Quaternion rot = Quaternion.Euler(0, 0, roll);
 		modelContainer.transform.rotation = rot;
 	}
