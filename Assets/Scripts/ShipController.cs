@@ -28,9 +28,6 @@ public class ShipController : MonoBehaviour {
 	public void Init() {
 
 		_shipData = data.shipData;
-		WeaponsController _weaponsController = gameObject.GetComponent<WeaponsController> ();
-		if (_weaponsController != null)
-			_weaponsController.Init (data.weaponsData);
 
 		// Rimuovo tutti gli elementi all'interno del model container
 		// Nel caso avessi già instanziato una navetta precedentemente
@@ -56,6 +53,10 @@ public class ShipController : MonoBehaviour {
 			}
 		}
 
+		WeaponsController _weaponsController = gameObject.GetComponent<WeaponsController> ();
+		if (_weaponsController != null)
+			_weaponsController.Init (data.weaponsData);
+		
 	}
 
 	// Funzione che controlla il movimento
