@@ -4,29 +4,39 @@ using UnityEngine;
 
 public class WeaponsController : MonoBehaviour {
 
-	private ShipWeapon _weapon1;
-	private ShipWeapon _weapon2;
+	// Lista delle armi
+	private List<ShipWeapon> _weapons;
 
 	// Inizializzo le armi
 	public void Init (WeaponsSystemData data) {
-		_weapon1 = new ShipWeapon ();
-		_weapon2 = new ShipWeapon ();
 
-		_weapon1.data = data.weapon1;
-		_weapon2.data = data.weapon2;
+		// Inizializzo la lista
+		_weapons = new List<ShipWeapon> ();
 
+		// Cicla sulle armi recuperate dallo scriptable object
+		// e successivamente recupera gli spawn points tramite i tag assegnati
+		foreach (WeaponData wd in data.weapons) {
+			ShipWeapon sw = new ShipWeapon ();
+			sw.data = wd;
+			Transform[] allChildren = gameObject.GetComponentsInChildren<Transform>();
+			foreach (Transform t in allChildren) {
+				if (t.gameObject.tag == sw.data.tag)
+					sw.spawnPoints.Add (t.gameObject);
+			}
+			_weapons.Add (sw);
+		}
 	}
 
 	// Durante il rendering di ogni frame...
 	void Update () {
 
-		// ... diminuisco il tempo che rimane per riutilizzare la seconda arma,
-		_weapon1.timeToNextFire -= Time.deltaTime;
-		_weapon2.timeToNextFire -= Time.deltaTime;
+		foreach (ShipWeapon sw in _weapons) {
+			// ... diminuisco il tempo che rimane per riutilizzare la seconda arma,
+			sw.timeToNextFire -= Time.deltaTime;
 
-		// ... controllo il fuoco delle armi
-		CheckWeaponFire (_weapon1);
-		CheckWeaponFire (_weapon2);
+			// ... controllo il fuoco delle armi
+			CheckWeaponFire (sw);
+		}
 	}
 
 	// Funzione che controlla il fuoco delle armi
@@ -46,13 +56,22 @@ public class WeaponsController : MonoBehaviour {
 		}
 	}
 
+	private void GenerateBullets(ShipWeapon weapon) {
+		// Crea una istanza del proiettile per ogni
+		// spawn point (se è abilitato)
+		foreach(GameObject spawn in weapon.spawnPoints) {
+			if (!spawn.activeInHierarchy)
+				continue;
+			GameObject go = GameObject.Instantiate (weapon.data.weaponPrefab, spawn.transform.position, spawn.transform.rotation);
+			go.name = weapon.data.name;
+		}
+	}
+
 	private void CheckSingleFire(ShipWeapon weapon) {
 		// Spara una singola volta per ogni volta che viene premuto
 		// il tasto 'Space'
 		if (Input.GetKeyDown (weapon.data.fireKeycode)) {
-			// Crea una istanza del proiettile e la rinomina
-			GameObject go = GameObject.Instantiate (weapon.data.weaponPrefab, transform.position, Quaternion.identity);
-			go.name = weapon.data.name;
+			GenerateBullets (weapon);
 		}
 	}
 
@@ -60,9 +79,7 @@ public class WeaponsController : MonoBehaviour {
 		// Spara se è intercorso il
 		// tempo per sparare il successivo proiettile
 		if (Input.GetKey (weapon.data.fireKeycode) && weapon.timeToNextFire <= 0) {
-			// Crea una istanza del secondo proiettile e la rinomina
-			GameObject go = GameObject.Instantiate (weapon.data.weaponPrefab, transform.position, Quaternion.identity);
-			go.name = weapon.data.name;
+			GenerateBullets (weapon);
 
 			// Inizializzo il contatore per il fuoco multiplo
 			weapon.timeToNextFire = weapon.data.fireInterval;
@@ -78,9 +95,7 @@ public class WeaponsController : MonoBehaviour {
 		// Spara se è intercorso il
 		// tempo per sparare il successivo proiettile
 		if (weapon.timeToNextFire <= 0) {
-			// Crea una istanza del secondo proiettile e la rinomina
-			GameObject go = GameObject.Instantiate (weapon.data.weaponPrefab, transform.position, Quaternion.identity);
-			go.name = weapon.data.name;
+			GenerateBullets (weapon);
 
 			// Inizializzo il contatore per il fuoco multiplo
 			weapon.timeToNextFire = weapon.data.fireInterval;

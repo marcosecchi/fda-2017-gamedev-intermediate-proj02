@@ -10,6 +10,9 @@ public class WeaponData {
 	// il nome dell'arma
 	public string name;
 
+	// L'etichetta dell'arma
+	public string tag;
+
 	// Il prefab del proiettile sparato
 	public GameObject weaponPrefab;
 
@@ -22,7 +25,6 @@ public class WeaponData {
 	// L'intervallo tra un proiettile ed il successivo
 	// (Solitamente utilizzato nei casi di Multiple ed Auto)
 	public float fireInterval = 0;
-
 }
 
 // Enumera i tipi di fuoco

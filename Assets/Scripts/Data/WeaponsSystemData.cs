@@ -7,7 +7,6 @@ using UnityEngine;
 [System.Serializable]
 public class WeaponsSystemData {
 
-	public WeaponData weapon1;
+	public WeaponData[] weapons;
 
-	public WeaponData weapon2;
 }
