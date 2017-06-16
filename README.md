@@ -9,6 +9,7 @@
 
 Top-down Space shooter in 3D.
 
+_Nota_: il progetto utilizza __Simple FX__, [scaricabile gratuitamente dallo Unity Asset Store](https://www.assetstore.unity3d.com/#!/content/67834?aid=1011lHJn).
 ## Argomenti Trattati
 
 * [Input.GetAxis()](https://docs.unity3d.com/ScriptReference/Input.GetAxis.html)
