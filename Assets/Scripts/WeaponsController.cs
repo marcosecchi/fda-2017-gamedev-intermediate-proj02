@@ -62,8 +62,12 @@ public class WeaponsController : MonoBehaviour {
 		foreach(GameObject spawn in weapon.spawnPoints) {
 			if (!spawn.activeInHierarchy)
 				continue;
-			GameObject go = GameObject.Instantiate (weapon.data.weaponPrefab, spawn.transform.position, spawn.transform.rotation);
-			go.name = weapon.data.name;
+			GameObject go = ObjectPooler.Instance.GetPooledObject (weapon.data.weaponPrefab);
+			go.transform.position = spawn.transform.position;
+			go.transform.rotation = spawn.transform.rotation;
+//			GameObject go = GameObject.Instantiate (weapon.data.weaponPrefab, spawn.transform.position, spawn.transform.rotation);
+//			go.name = weapon.data.name;
+			go.SetActive (true);
 		}
 	}
 

@@ -16,6 +16,7 @@ public class ProjectileController : MonoBehaviour {
 	// Quando il renderer dell'oggetto esce dalla vista della
 	// Camera, l'oggetto viene distrutto
 	void OnBecameInvisible() {
-		Destroy (gameObject);
+		gameObject.SetActive (false);
+//		Destroy (gameObject);
 	}
 }
