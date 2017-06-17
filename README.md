@@ -23,6 +23,8 @@ _Nota_: il progetto utilizza __Simple FX__, [scaricabile gratuitamente dallo Uni
 * [Renderer.materials](https://docs.unity3d.com/ScriptReference/Renderer-materials.html)
 * [GetComponentsInChildren()](https://docs.unity3d.com/ScriptReference/Component.GetComponentsInChildren.html)
 * [Camera.WorldToViewportPoint()](https://docs.unity3d.com/ScriptReference/Camera.WorldToViewportPoint.html)
+* _Object Pooling_
+* [_Singleton Pattern_](http://wiki.unity3d.com/index.php/Singleton)
 
 ### Script
 
@@ -47,3 +49,7 @@ _Nota_: il progetto utilizza __Simple FX__, [scaricabile gratuitamente dallo Uni
 * [Object Pooling in Unity](https://www.raywenderlich.com/136091/object-pooling-unity)
 * [Object Pooling Live Training](https://unity3d.com/learn/tutorials/topics/scripting/object-pooling)
 * [Object Pools (Keeping Things Alive)](http://catlikecoding.com/unity/tutorials/object-pools/)
+
+#### Singleton Pattern
+
+* [Songleton pattern](https://it.wikipedia.org/wiki/Singleton) su Wikipedia
