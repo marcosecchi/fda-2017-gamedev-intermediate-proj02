@@ -12,7 +12,7 @@ public class ShipController : MonoBehaviour {
 	private ShipSystemData _shipData;
 
 	private WeaponsController _weaponsController;
-
+	private EnginesController _enginesController;
 
 	void Start () {
 		Init ();
@@ -53,10 +53,14 @@ public class ShipController : MonoBehaviour {
 			}
 		}
 
-		WeaponsController _weaponsController = gameObject.GetComponent<WeaponsController> ();
+		_weaponsController = gameObject.GetComponent<WeaponsController> ();
 		if (_weaponsController != null)
 			_weaponsController.Init (data.weaponsData);
-		
+
+		_enginesController = gameObject.GetComponent<EnginesController> ();
+		if (_enginesController != null)
+			_enginesController.Init (data.enginesData);
+	
 	}
 
 	// Funzione che controlla il movimento
@@ -66,6 +70,8 @@ public class ShipController : MonoBehaviour {
 		// e le moltiplico per l'accelerazione della navetta
 		float vMove = Input.GetAxis ("Vertical") * _shipData.acceleration;
 		float hMove = Input.GetAxis ("Horizontal") * _shipData.acceleration;
+
+		_enginesController.UpdateEngines (Input.GetAxis ("Vertical"), Input.GetAxis ("Horizontal"));
 
 		// Calcolo lo spostamento effettivo (orizzontale e verticale)
 		// basato sul deltaTime, cioè il tempo intercorso dall'ultimo

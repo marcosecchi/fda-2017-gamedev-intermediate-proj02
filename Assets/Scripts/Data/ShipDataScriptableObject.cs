@@ -16,4 +16,9 @@ public class ShipDataScriptableObject : ScriptableObject {
 
 	public WeaponsSystemData weaponsData;
 
+	// Attributo decoratore per creare un titolo nella finestra dell'Inspector
+	[Header("Engine Data")]
+
+	public EnginesSysyemData enginesData;
+
 }
