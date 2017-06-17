@@ -37,4 +37,13 @@ _Nota_: il progetto utilizza __Simple FX__, [scaricabile gratuitamente dallo Uni
 
 ### Link Utili
 
+#### Scriptable Objects
+
 * Video seminario sugli [Scriptable Objects](https://unity3d.com/learn/tutorials/modules/beginner/live-training-archive/scriptable-objects)
+
+#### Object Pooling
+
+* [Object pool pattern](https://en.wikipedia.org/wiki/Object_pool_pattern) su Wikipedia
+* [Object Pooling in Unity](https://www.raywenderlich.com/136091/object-pooling-unity)
+* [Object Pooling Live Training](https://unity3d.com/learn/tutorials/topics/scripting/object-pooling)
+* [Object Pools (Keeping Things Alive)](http://catlikecoding.com/unity/tutorials/object-pools/)
