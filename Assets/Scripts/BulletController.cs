@@ -20,6 +20,6 @@ public class BulletController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		Debug.Log ("Hit");
+		Debug.Log ("Hit: " + collision.gameObject);
 	}
 }
