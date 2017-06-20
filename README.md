@@ -25,6 +25,7 @@ _Nota_: il progetto utilizza __Simple FX__, [scaricabile gratuitamente dallo Uni
 * [Camera.WorldToViewportPoint()](https://docs.unity3d.com/ScriptReference/Camera.WorldToViewportPoint.html)
 * _Object Pooling_
 * [_Singleton Pattern_](http://wiki.unity3d.com/index.php/Singleton)
+* [Particle System](https://docs.unity3d.com/Manual/ParticleSystems.html)
 
 ### Script
 
@@ -35,6 +36,7 @@ _Nota_: il progetto utilizza __Simple FX__, [scaricabile gratuitamente dallo Uni
 * [Utilizzo delle _List_](https://repl.it/Ike9/latest/162317)
 * [Move Ship](https://gist.github.com/marcosecchi/9abfb0b33bd9c8897086753b9631ee01)
 * [Ship Management System (Improved)](https://gist.github.com/marcosecchi/019f1de99e04d4a2ea04d56538c262a0)
+* [Ship Management System (Engines)](https://gist.github.com/marcosecchi/a247ed38d39114d3f1a6e0e161f96ca2)
 
 
 ### Link Utili
